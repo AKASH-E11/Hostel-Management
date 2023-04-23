@@ -22,9 +22,11 @@ const getStudent = async (req, res) => {
         await StudentModel.find()
             .then((result) => {
                 console.log(result)
+                res.json(result)
             })
             .catch(err => {
                 console.log(err)
+                res.send(err)
             })
     }
     catch (err) {
@@ -39,9 +41,11 @@ const getStudentById = async (req, res) => {
         const student = await StudentModel.findById(id)
             .then((result) => {
                 console.log(result)
+                res.json(result)
             })
             .catch(err => {
                 console.log(err)
+                res.send(err)
             })
     }
     catch (err) {
@@ -60,8 +64,9 @@ const addStudent = async (req, res) => {
             roomno: roomno
         })
         await newStudent.save()
-            .then(() => {
+            .then((result) => {
                 console.log("Student Successfully Saved...")
+                res.send("Student Successfully Saved...")
             })
             .catch(err => {
                 console.log(err)
@@ -88,9 +93,11 @@ const updateStudent = async (req, res) => {
         })
             .then((result) => {
                 console.log(name,rollno,roomno)
+                res.json(result)
             })
             .catch(err => {
                 console.log(err)
+                res.send(err)
             })
         console.log("Student Successfully Updated")
     }
@@ -105,9 +112,11 @@ const removeStudent = async (req, res) => {
         await StudentModel.deleteOne({ _id: req.params.id })
             .then((result) => {
                 console.log(result)
+                res.send("Successfully deleted")
             })
             .catch(err => {
                 console.log(err)
+                res.send("Error")
             })
     }
     catch (err) {
