@@ -22,11 +22,11 @@ const getStudent = async (req, res) => {
         await StudentModel.find()
             .then((result) => {
                 console.log(result)
-                res.json(result)
+                res.render("success")
             })
             .catch(err => {
                 console.log(err)
-                res.send(err)
+                res.render("failure")
             })
     }
     catch (err) {
@@ -41,11 +41,11 @@ const getStudentById = async (req, res) => {
         const student = await StudentModel.findById(id)
             .then((result) => {
                 console.log(result)
-                res.json(result)
+                res.render("success")
             })
             .catch(err => {
                 console.log(err)
-                res.send(err)
+                res.render("failure")
             })
     }
     catch (err) {
@@ -66,10 +66,10 @@ const addStudent = async (req, res) => {
         await newStudent.save()
             .then((result) => {
                 console.log("Student Successfully Saved...")
-                res.send("Student Successfully Saved...")
+                res.render("success")
             })
             .catch(err => {
-                console.log(err)
+                res.render("failure")
             })
         res.status(200).json({ user: req.body })
     }
@@ -93,11 +93,11 @@ const updateStudent = async (req, res) => {
         })
             .then((result) => {
                 console.log(name,rollno,roomno)
-                res.json(result)
+                res.render("success")
             })
             .catch(err => {
                 console.log(err)
-                res.send(err)
+                rres.render("failure")
             })
         console.log("Student Successfully Updated")
     }
@@ -112,11 +112,11 @@ const removeStudent = async (req, res) => {
         await StudentModel.deleteOne({ _id: req.params.id })
             .then((result) => {
                 console.log(result)
-                res.send("Successfully deleted")
+                res.render("success")
             })
             .catch(err => {
                 console.log(err)
-                res.send("Error")
+                res.render("failure")
             })
     }
     catch (err) {
