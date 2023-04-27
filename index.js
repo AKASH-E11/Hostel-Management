@@ -3,6 +3,7 @@ const bodyParser = require("body-parser")
 const dotenv = require("dotenv")
 const cookieParser = require("cookie-parser")
 const ejs = require("ejs")
+const cors  = require("cors")
 
 
 
@@ -29,10 +30,11 @@ app.use(express.json())
 app.use(bodyParser.urlencoded({ extended: true }))
 app.use(cookieParser())
 app.set("view engine","ejs")
+app.use(cors())
 
-app.use("/Student", Studentroute)
-app.use("/Staff", Staffroute)
-app.use("/Food", Foodroute)
+app.use("/student", Studentroute)
+app.use("/staff", Staffroute)
+app.use("/food", Foodroute)
 
 const PORT = process.env.PORT
 

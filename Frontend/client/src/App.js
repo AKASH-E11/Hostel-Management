@@ -1,23 +1,42 @@
 import logo from './logo.svg';
 import './App.css';
+import React,{useState,useEffect} from "react";
+import axios from "axios"
 
 function App() {
+  const [studentData, setStudentData] = useState([])
+  const [name,setName] = useState("")
+  const [rollno,setRollno] = useState("")
+  const [roomno,setRoomno] = useState("")
+  
+  const addtolist = () => {
+    JSON.stringify()
+    axios.post("http://localhost:3001/Student",{name:name,rollno:rollno,roomno:roomno})
+
+  }
+  const getStudentData = () => {
+    axios.get("https://hostel-management-production.up.railway.app/Student").then(res => {
+      setStudentData(res.data)
+    }).catch(err => {
+      console.log("getting data failed", err);
+    });
+
+
+    fetch('https://hostel-management-production.up.railway.app/Student').then(res => res.json()).then(res => res.data)
+  }
+  useEffect(() => {
+    getStudentData()
+  },[])
+
   return (
     <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
+      <form>
+    <input type="text" onChange={(event) => {setName(event.target.value)}}></input>
+    <input type="text" onChange={(event) => {setName(event.target.value)}}></input>
+    <input type="text" onChange={(event) => {setName(event.target.value)}}></input>
+    <input type="file"></input>
+    <button>Submit</button>
+   </form>
     </div>
   );
 }

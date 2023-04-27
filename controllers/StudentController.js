@@ -17,20 +17,23 @@ const upload = multer({ storage: storage })
 
 
 
+
+let a = 5;
+console.log(a);
+
+
+
 const getStudent = async (req, res) => {
+
     try {
-        await StudentModel.find()
-            .then((result) => {
-                console.log(result)
-                res.render("success")
-            })
-            .catch(err => {
-                console.log(err)
-                res.render("failure")
-            })
+        let studentData = await StudentModel.find();
+        console.log(studentData);
+        res.json(studentData);
+
     }
     catch (err) {
-        console.log(err)
+        console.log(err);
+        res.status(400).send("Getting student faied.")
     }
 }
 
@@ -41,11 +44,9 @@ const getStudentById = async (req, res) => {
         const student = await StudentModel.findById(id)
             .then((result) => {
                 console.log(result)
-                res.render("success")
             })
             .catch(err => {
                 console.log(err)
-                res.render("failure")
             })
     }
     catch (err) {
@@ -66,10 +67,10 @@ const addStudent = async (req, res) => {
         await newStudent.save()
             .then((result) => {
                 console.log("Student Successfully Saved...")
-                res.render("success")
+
             })
             .catch(err => {
-                res.render("failure")
+                console.log(err)
             })
         res.status(200).json({ user: req.body })
     }
@@ -81,7 +82,7 @@ const addStudent = async (req, res) => {
 
 const updateStudent = async (req, res) => {
     const { name, rollno, roomno } = req.body
-    console.log(name,rollno,roomno)
+    console.log(name, rollno, roomno)
     try {
         StudentModel.findOneAndUpdate({ _id: req.params.id }, {
             $set: {
@@ -92,12 +93,10 @@ const updateStudent = async (req, res) => {
             }
         })
             .then((result) => {
-                console.log(name,rollno,roomno)
-                res.render("success")
+                console.log(name, rollno, roomno)
             })
             .catch(err => {
                 console.log(err)
-                rres.render("failure")
             })
         console.log("Student Successfully Updated")
     }
@@ -112,11 +111,9 @@ const removeStudent = async (req, res) => {
         await StudentModel.deleteOne({ _id: req.params.id })
             .then((result) => {
                 console.log(result)
-                res.render("success")
             })
             .catch(err => {
                 console.log(err)
-                res.render("failure")
             })
     }
     catch (err) {
