@@ -22,7 +22,7 @@ function App() {
     });
 
 
-    fetch('https://hostel-management-production.up.railway.app/Student').then(res => res.json()).then(res => res.data)
+    // fetch('https://hostel-management-production.up.railway.app/Student').then(res => res.json()).then(res => res.data)
   }
   useEffect(() => {
     getStudentData()
@@ -30,6 +30,19 @@ function App() {
 
   return (
     <div className="App">
+
+   {
+    studentData?.map(itm => {
+      return (
+        <div>  
+          <p>{itm.name}</p>
+
+          </div>
+      )
+    })
+   }
+
+
       <form>
     <input type="text" onChange={(event) => {setName(event.target.value)}}></input>
     <input type="text" onChange={(event) => {setName(event.target.value)}}></input>

@@ -24,12 +24,10 @@ console.log(a);
 
 
 const getStudent = async (req, res) => {
-
     try {
         let studentData = await StudentModel.find();
         console.log(studentData);
         res.json(studentData);
-
     }
     catch (err) {
         console.log(err);
@@ -42,15 +40,11 @@ const getStudentById = async (req, res) => {
     const id = req.params.id
     try {
         const student = await StudentModel.findById(id)
-            .then((result) => {
-                console.log(result)
-            })
-            .catch(err => {
-                console.log(err)
-            })
+        res.json(student)
     }
     catch (err) {
-        console.log(err)
+        console.log(err);
+        res.status(400).send("failed")
     }
 }
 
@@ -64,14 +58,7 @@ const addStudent = async (req, res) => {
             path: "../Images/" + fileName,
             roomno: roomno
         })
-        await newStudent.save()
-            .then((result) => {
-                console.log("Student Successfully Saved...")
-
-            })
-            .catch(err => {
-                console.log(err)
-            })
+        await newStudent.save();
         res.status(200).json({ user: req.body })
     }
     catch (err) {
@@ -92,12 +79,7 @@ const updateStudent = async (req, res) => {
                 roomno: roomno
             }
         })
-            .then((result) => {
-                console.log(name, rollno, roomno)
-            })
-            .catch(err => {
-                console.log(err)
-            })
+        res.
         console.log("Student Successfully Updated")
     }
     catch (err) {
