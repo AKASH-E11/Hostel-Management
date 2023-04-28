@@ -30,17 +30,28 @@ function App() {
 
   return (
     <div className="App">
-
+      <table>
+ <thead>
+          <tr>
+            <td>Name</td>
+            <td>RollNo</td>
+            <td>RoomNo</td>
+          </tr>
+          </thead>
+          <tbody>
    {
     studentData?.map(itm => {
       return (
-        <div>  
-          <p>{itm.name}</p>
-
-          </div>
+        <tr>
+        <td>itm.name</td>
+        <td>itm.roomno</td>
+        <td>itm.rollno</td>
+        </tr>
       )
     })
    }
+   </tbody>
+   </table>
 
 
       <form>
