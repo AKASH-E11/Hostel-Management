@@ -10,13 +10,9 @@ const createToken = (id) => {
 
 const getStaff = async (req, res) => {
     try {
-        await StaffModel.find()
-            .then((result) => {
-                console.log(result)
-            })
-            .catch(err => {
-                console.log(err)
-            })
+       let staffData = await StaffModel.find()
+        console.log(staffData)
+        res.json(staffData)
     }
     catch (err) {
         console.log(err)
